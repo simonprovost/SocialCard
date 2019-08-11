@@ -25,10 +25,10 @@ Did you ever think that send your username/pseudonyme of your social network to 
 * Twitter OK/KO -> They pulled out my consumer key, but the code works before they was done that.
 
 # Few card example : 
-<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image7762564679173257706__01.png" width="250">
-<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image8320084771686850085__01.png" width="250">
-<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image645856183120374650__01.png" width="250">
-<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image3736685307837112617__01.png" width="250">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image7762564679173257706__01.png" width="500">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image8320084771686850085__01.png" width="500">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image645856183120374650__01.png" width="500">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image3736685307837112617__01.png" width="500">
 
 In the following gif you'll see few functionality of the app -->
 
