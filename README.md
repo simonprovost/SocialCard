@@ -18,11 +18,24 @@ Did you ever think that send your username/pseudonyme of your social network to 
 * Android works well on One Plus 6T/ IOS not yet tested.
 * Card for social networks is a generic component and not a specific for each, it's a component made by me to create a card with thumbnail where you want or text to where you want in the corner.
 * App made with expo as well and not with native method.
+* Facebook OK.
+* Linkedin OK.
+* Instagram OK.
+* Snapchat KO -> They won't give user info that's why I didn't made anything for this social network.
+* Twitter OK/KO -> They pulled out my consumer key, but the code works before they was done that.
 
 Contact us for any claims.
 
-# Few functionalities
+In the following gif you'll see few functionality of the app -->
 
-![Instagram Connexion](./instagramConnexion.gif)
+# Facebook connexion + Facebook card
+*![Facebook Connexion](https://github.com/simonprovost/SocialCard/blob/master/facebookConnexionWithModal.gif)
 
+# Linkedin connexion + Linkedin card
+*![Linkedin Connexion](https://github.com/simonprovost/SocialCard/blob/master/linkedinConnexionwithModal.gif)
 
+# Instagram connexion + Instagram card
+*![Instagram Connexion](./InstagramConnexion.gif)
+
+# Screenshot Functionality
+*![Screen funcs](https://github.com/simonprovost/SocialCard/blob/master/screenShot.gif)
