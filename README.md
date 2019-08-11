@@ -1,2 +1,28 @@
 # SocialCard
-Send your social Card to your friends, flirts. It's more faster than ever and beautifull as well.
+<br/>
+<p align="center">
+<img src="https://www.pinclipart.com/picdir/big/170-1707650_social-media-icons-facebook-like-and-love-buttons.png" width="250">
+</p>
+<br/>
+Did you ever think that send your username/pseudonyme of your social network to your friend or one of your flirt, is boring  ? With Social Card you'll send your social card of your choice, it's more beautifull, more faster and more professional.
+
+
+# Social Card APP
+* We have written an app to offer you the possibility to create your social network card in one click.
+* We communicate with the API from few social network to give you a modal to connect to your account and we catch your user info to create your card.
+* We have an option as well to screenshot with the perfect size your card to send to the world who you are on Facebook and others.
+
+# Technical informations
+
+* App made in React native.
+* Android works well on One Plus 6T/ IOS not yet tested.
+* Card for social networks is a generic component and not a specific for each, it's a component made by me to create a card with thumbnail where you want or text to where you want in the corner.
+* App made with expo as well and not with native method.
+
+Contact us for any claims.
+
+# Few functionalities
+
+![](facebookConnexion.gif)
+
+
