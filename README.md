@@ -44,7 +44,7 @@ In the following gif you'll see few functionality of the app -->
 # Screenshot Functionality
 *![Screen funcs](https://github.com/simonprovost/SocialCard/blob/master/screenShot.gif)
 
-#Installation
+# Installation
 
 * npm install
 * yarn start
