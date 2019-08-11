@@ -26,6 +26,12 @@ Did you ever think that send your username/pseudonyme of your social network to 
 
 Contact us for any claims.
 
+# Few card example : 
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image7762564679173257706__01.png" width="250">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image8320084771686850085__01.png" width="250">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image645856183120374650__01.png" width="250">
+<img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image3736685307837112617__01.png" width="250">
+
 In the following gif you'll see few functionality of the app -->
 
 # Facebook connexion + Facebook card
@@ -39,3 +45,5 @@ In the following gif you'll see few functionality of the app -->
 
 # Screenshot Functionality
 *![Screen funcs](https://github.com/simonprovost/SocialCard/blob/master/screenShot.gif)
+
+
