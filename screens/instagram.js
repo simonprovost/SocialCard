@@ -1,10 +1,12 @@
 import React, {Component } from "react";
 import * as Facebook from "expo-facebook";
-import {Button, Container, Text, View} from "native-base";
+import {Button, Container, Root, Text, View} from "native-base";
 import {GenericRoundedCard} from "../components/genericRoundedCard";
 import {StyleSheet} from "react-native";
 import InstagramLogin from "react-native-instagram-login";
 import {showMessage} from "react-native-flash-message";
+import * as dataConstants from './../app.json';
+import {AppLoading} from "expo";
 
 export class InstagramScreen extends Component {
 	constructor(props) {
@@ -16,7 +18,17 @@ export class InstagramScreen extends Component {
 			followingInstagram: 0,
 			followersInstagram: 0,
 			socialNetworkConnected: false,
+			redirectURI: null,
+			clientID: null,
 		};
+	}
+
+	componentDidMount() {
+		this.setState({
+			clientID: dataConstants.expo.extra.instagram.clientID,
+			redirectURI: dataConstants.expo.extra.instagram.redirectURI,
+			loading: false,
+		})
 	}
 
 	addInstagramInfoUser = (data) => {
@@ -45,6 +57,15 @@ export class InstagramScreen extends Component {
 
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<Root>
+					<AppLoading
+					/>
+				</Root>
+			);
+		}
+
 		let instaCard =
 			this.state.socialNetworkConnected ?
 				<View style={{flex: 1,}}>
@@ -168,8 +189,8 @@ export class InstagramScreen extends Component {
 					</Button>
 					<InstagramLogin
 						ref= {ref => this.instagramLogin= ref}
-						clientId='b6593dc2f7c94d51a0faf65b1d3c0093'
-						redirectUrl='https://google.com'
+						clientId={this.state.clientID}
+						redirectUrl={this.state.redirectURI}
 						scopes={['basic']}
 
 						onLoginSuccess={(token) => {

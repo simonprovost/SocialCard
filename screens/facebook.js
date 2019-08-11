@@ -1,9 +1,11 @@
 import React, {Component } from "react";
 import * as Facebook from "expo-facebook";
-import {Button, Container, Text, View, Thumbnail, Body} from "native-base";
+import {Button, Container, Text, View, Thumbnail, Body, Root} from "native-base";
 import {GenericRoundedCard} from "../components/genericRoundedCard";
 import {StyleSheet, TouchableOpacity, } from "react-native";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import * as dataConstants from './../app.json';
+import {AppLoading} from "expo";
 
 export class FacebookScreen extends Component {
 	constructor(props) {
@@ -14,8 +16,14 @@ export class FacebookScreen extends Component {
 			picture: null,
 			email: null,
 			socialNetworkConnected: false,
+			appId: null,
 		};
 		this.logInFacebook = this.logInFacebook.bind(this);
+	}
+
+	componentDidMount() {
+		this.setState({appId: dataConstants.expo.extra.facebook.appId,
+		loading: false})
 	}
 
 	async logInFacebook() {
@@ -26,7 +34,7 @@ export class FacebookScreen extends Component {
 				expires,
 				permissions,
 				declinedPermissions,
-			} = await Facebook.logInWithReadPermissionsAsync('2445401388871908', {
+			} = await Facebook.logInWithReadPermissionsAsync(this.state.appId, {
 				permissions: ['public_profile', 'email',],
 			});
 			if (type === 'success') {
@@ -61,6 +69,14 @@ export class FacebookScreen extends Component {
 	}
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<Root>
+					<AppLoading
+					/>
+				</Root>
+			);
+		}
 		let facebookCard = this.state.socialNetworkConnected ?
 			<View style={{flex: 1, }}>
 				<View style={styles.container}

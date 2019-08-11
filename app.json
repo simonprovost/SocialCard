@@ -29,12 +29,21 @@
       "supportsTablet": true
     },
     "extra": {
-      "twitter": {
-        "consumerKey": "sIaBRZBbihUabSRkENZUjWL2e",
-        "consumerKeySecret": "u6qePkEENXuI5zttzFMYzIL335JBAGq38kpF8FGzptVgBt1CvB"
+      "facebook": {
+        "appId": ""
       },
       "instagram": {
-        "clientId": "d934c0bd06694d9eb3c0625d26ee39b9"
+          "clientID": "",
+        "redirectURI": ""
+      },
+      "linkedin": {
+        "clientID": "",
+        "clientSecret": "",
+        "redirectURI": ""
+      },
+      "twitter": {
+        "consumerKey": "",
+        "consumerKeySecret": ""
       }
     }
   }

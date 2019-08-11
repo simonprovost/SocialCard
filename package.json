@@ -19,6 +19,7 @@
     "react-native-clean-project": "^3.2.4",
     "react-native-element": "^1.2.1",
     "react-native-elements": "^1.1.0",
+    "react-native-exit-app": "^1.0.0",
     "react-native-flash-message": "^0.1.13",
     "react-native-instagram-login": "^1.1.1",
     "react-native-linkedin": "^1.3.2",

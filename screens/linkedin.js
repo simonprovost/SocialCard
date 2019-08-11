@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import {Button, Container, Text, View} from "native-base";
+import {Button, Container, Root, Text, View} from "native-base";
 import {GenericRoundedCard} from "../components/genericRoundedCard";
 import {StyleSheet} from "react-native";
 import LinkedInModal from "react-native-linkedin";
 import {showMessage} from "react-native-flash-message";
+import * as dataConstants from './../app.json';
+import {AppLoading} from "expo";
 
 export class LinkedinScreen extends Component {
 	constructor(props) {
@@ -12,8 +14,19 @@ export class LinkedinScreen extends Component {
 			loading: true,
 			linkedinConnected: false,
 			socialNetworkConnected: false,
-
+			clientID: null,
+			clientSecret: null,
+			redirectURI: null,
 		};
+	}
+
+	componentDidMount() {
+		this.setState({
+			clientID: dataConstants.expo.extra.linkedin.clientID,
+			clientSecret: dataConstants.expo.extra.linkedin.clientSecret,
+			redirectURI: dataConstants.expo.extra.linkedin.redirectURI,
+			loading: false,
+		})
 	}
 
 	async getUserInfoIn({ access_token }) {
@@ -40,6 +53,15 @@ export class LinkedinScreen extends Component {
 	}
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<Root>
+					<AppLoading
+					/>
+				</Root>
+			);
+		}
+
 		let inCard =
 			this.state.linkedinConnected ?
 				<View style={{flex: 1,}}>
@@ -128,9 +150,9 @@ export class LinkedinScreen extends Component {
 						ref={ref => {
 							this.modal = ref
 						}}
-						clientID={"86vmluha5e73ou"}
-						clientSecret={"Q6p5Ft46YLlg2u6F"}
-						redirectUri="https://www.google.fr/"
+						clientID={this.state.clientID}
+						clientSecret={this.state.clientSecret}
+						redirectUri={this.state.redirectURI}
 						onSuccess={data => {
 							this.getUserInfoIn(data);
 							showMessage({

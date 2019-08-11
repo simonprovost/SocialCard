@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://gm-rib.simonprovost.socialcard.exp.direct",
+  "packagerNgrokUrl": "https://packager.gm-rib.simonprovost.socialcard.exp.direct",
+  "ngrokPid": 25041
 }

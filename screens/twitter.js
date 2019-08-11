@@ -6,6 +6,7 @@ import {AsyncStorage, StyleSheet} from "react-native";
 import twitter, {TWLoginButton} from "react-native-simple-twitter";
 import {AppLoading} from "expo";
 import { showMessage, hideMessage } from "react-native-flash-message";
+import * as dataConstants from './../app.json';
 
 export class TwitterScreen extends Component {
 	constructor(props) {
@@ -22,7 +23,7 @@ export class TwitterScreen extends Component {
 
 	async componentDidMount() {
 		loadResourcesAsync = async () => Promise.all([
-			twitter.setConsumerKey("sIaBRZBbihUabSRkENZUjWL2e","u6qePkEENXuI5zttzFMYzIL335JBAGq38kpF8FGzptVgBt1CvB"),
+			twitter.setConsumerKey(dataConstants.expo.extra.twitter.consumerKey,dataConstants.expo.extra.twitter.consumerKeySecret),
 		]);
 		this.setState({loading: false});
 	}

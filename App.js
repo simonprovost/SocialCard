@@ -7,6 +7,7 @@ import {StatusBar,
 	StyleSheet,
 	Alert,
 	CameraRoll,
+	BackHandler
 } from 'react-native';
 import Swiper from 'react-native-swiper'
 import {FacebookScreen} from "./screens/facebook";
@@ -17,6 +18,8 @@ import * as Permissions from 'expo-permissions';
 import FlashMessage from "react-native-flash-message";
 import { showMessage, hideMessage } from "react-native-flash-message";
 import {Header, Text} from "react-native-elements"
+import * as dataConstants from './app.json';
+
 
 export default class App extends Component {
 
@@ -30,7 +33,40 @@ export default class App extends Component {
 		};
 	}
 
-	async componentDidMount() {
+	async componentDidMount(title, message) {
+		if (
+			dataConstants.expo.extra.facebook.appId === undefined ||
+			dataConstants.expo.extra.instagram.clientID === undefined ||
+			dataConstants.expo.extra.instagram.redirectURI === undefined ||
+			dataConstants.expo.extra.linkedin.clientID === undefined ||
+			dataConstants.expo.extra.linkedin.clientSecret === undefined ||
+			dataConstants.expo.extra.linkedin.redirectURI === undefined ||
+			dataConstants.expo.extra.twitter.consumerKey === undefined ||
+			dataConstants.expo.extra.twitter.consumerKeySecret === undefined ||
+			dataConstants.expo.extra.facebook.appId === "" ||
+			dataConstants.expo.extra.instagram.clientID === "" ||
+			dataConstants.expo.extra.instagram.redirectURI === "" ||
+			dataConstants.expo.extra.linkedin.clientID === "" ||
+			dataConstants.expo.extra.linkedin.clientSecret === "" ||
+			dataConstants.expo.extra.linkedin.redirectURI === "" ||
+			dataConstants.expo.extra.twitter.consumerKey === "" ||
+			dataConstants.expo.extra.twitter.consumerKeySecret === ""
+		) {
+			Alert.alert(
+				'Social card APP INFO',
+				'Data for API was not found (ios you can exit by hand the app)',
+				[
+					{text: 'How to solved it  ?', onPress: () => {
+							Alert.alert('Social Card APP INFO', 'Open app.json to configure the data for api', [
+								{text: 'OK', onPress: () => BackHandler.exitApp()}
+							])
+						}},
+					{text: 'OK', onPress: () => BackHandler.exitApp()},
+				],
+				{cancelable: false},
+			);
+		}
+
 		await Font.loadAsync({
 			Roboto: require("native-base/Fonts/Roboto.ttf"),
 			Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
@@ -124,7 +160,7 @@ export default class App extends Component {
 						height: "10%",
 						borderBottomRightRadius: 60,
 						borderBottomLeftRadius: 60,
-					}}
+					}}get
 				/>
 				<Swiper
 					showsPagination={true}
