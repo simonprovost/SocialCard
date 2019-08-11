@@ -112,7 +112,6 @@ export default class App extends Component {
 			);
 		}
 
-
 		return (
 			<View style={styles.container}>
 				<Header
@@ -125,8 +124,6 @@ export default class App extends Component {
 						height: "10%",
 						borderBottomRightRadius: 60,
 						borderBottomLeftRadius: 60,
-						borderTopRightRadius: 15,
-						borderTopLeftRadius: 15,
 					}}
 				/>
 				<Swiper
