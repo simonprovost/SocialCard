@@ -24,8 +24,6 @@ Did you ever think that send your username/pseudonyme of your social network to 
 * Snapchat KO -> They won't give user info that's why I didn't made anything for this social network.
 * Twitter OK/KO -> They pulled out my consumer key, but the code works before they was done that.
 
-Contact us for any claims.
-
 # Few card example : 
 <img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image7762564679173257706__01.png" width="250">
 <img src="https://github.com/simonprovost/SocialCard/blob/master/ReactNative-snapshot-image8320084771686850085__01.png" width="250">
@@ -46,4 +44,10 @@ In the following gif you'll see few functionality of the app -->
 # Screenshot Functionality
 *![Screen funcs](https://github.com/simonprovost/SocialCard/blob/master/screenShot.gif)
 
+#Installation
+
+* npm install
+* yarn start
+
+Contact us for any claims.
 
