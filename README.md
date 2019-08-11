@@ -23,6 +23,6 @@ Contact us for any claims.
 
 # Few functionalities
 
-![](facebookConnexion.gif)
+![Instagram Connexion](./instagramConnexion.gif)
 
 
