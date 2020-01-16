@@ -15,7 +15,7 @@ Did you ever think that send your username/pseudonyme of your social network to 
 # Technical informations
 
 * App made in React native.
-* Android works well on One Plus 6T/ IOS not yet tested.
+* Android works well on One Plus 6T/ IOS works but UI is broke I don't have time to watch right now.
 * Card for social networks is a generic component and not a specific for each, it's a component made by me to create a card with thumbnail where you want or text to where you want in the corner.
 * App made with expo as well and not with native method.
 * Facebook OK.
@@ -44,9 +44,10 @@ In the following gif you'll see few functionality of the app -->
 # Screenshot Functionality
 *![Screen funcs](https://github.com/simonprovost/SocialCard/blob/master/screenShot.gif)
 
-# Installation
+# Installation / Usage
 
 * npm install
+* configure app.json data "extra"
 * yarn start
 
 Contact us for any claims.
