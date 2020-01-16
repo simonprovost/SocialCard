@@ -1,6 +1,6 @@
 import React, {Component } from "react";
 import * as Facebook from "expo-facebook";
-import {Button, Container, Text, View, Thumbnail, Body, Root} from "native-base";
+import {Button, Container, Text, View, Thumbnail, Body, Root, Icon} from "native-base";
 import {GenericRoundedCard} from "../components/genericRoundedCard";
 import {StyleSheet, TouchableOpacity, } from "react-native";
 import { showMessage, hideMessage } from "react-native-flash-message";
@@ -23,7 +23,7 @@ export class FacebookScreen extends Component {
 
 	componentDidMount() {
 		this.setState({appId: dataConstants.expo.extra.facebook.appId,
-		loading: false})
+			loading: false})
 	}
 
 	async logInFacebook() {
@@ -44,18 +44,18 @@ export class FacebookScreen extends Component {
 				const { picture, name, email } = await response.json();
 				this.setState({picture: picture, name: name, email: email, socialNetworkConnected: true});
 				showMessage({
-				message: "Facebook Login Info",
-				description: "User Connected.",
-				type: "success",
-				icon: "success",
-			});
+					message: "Facebook Login Info",
+					description: "User Connected.",
+					type: "success",
+					icon: "success",
+				});
 			} else {
 				showMessage({
-				message: "Facebook Login Info",
-				description: "User cancelled the connexion method.",
-				type: "info",
-				icon: "info",
-			});
+					message: "Facebook Login Info",
+					description: "User cancelled the connexion method.",
+					type: "info",
+					icon: "info",
+				});
 				// type === 'cancel'
 			}
 		} catch ({ message }) {
@@ -106,14 +106,13 @@ export class FacebookScreen extends Component {
 						headerRightCorner={'https://www.ameswessex.com/wp-content/uploads/2017/05/facebook-logo-png-white-i6-300x300.png'}
 						formatPictureTopRightCorner={'square'}
 
-						bgCard={"#3b5998"}
+						backgroundColorCard={"#3b5998"}
 					/>
 				</View>
 				<Button rounded
 				        onPress={() => this.props.screenShot(this.facebookView)}
 				        title={"Screenshot Facebook view"}
 				        style={{flex: 1,
-					        marginBottom: 50,
 
 					        shadowColor: 'rgba(0,0,0, .4)', // IOS
 					        shadowOffset: { height: 1, width: 1 }, // IOS
@@ -157,7 +156,7 @@ export class FacebookScreen extends Component {
 					headerRightCorner={'https://www.ameswessex.com/wp-content/uploads/2017/05/facebook-logo-png-white-i6-300x300.png'}
 					formatPictureTopRightCorner={'square'}
 
-					bgCard={"#3b5998"}
+					backgroundColorCard={"#3b5998"}
 				/>
 				<Button rounded
 				        onPress={this.logInFacebook}
@@ -175,6 +174,8 @@ export class FacebookScreen extends Component {
 					        elevation: 2,
 				        }}
 				>
+					<Icon name="logo-facebook" />
+
 					<Text style={{
 						fontFamily: 'Roboto',
 						color: 'white',
@@ -192,13 +193,11 @@ export class FacebookScreen extends Component {
 	}
 }
 
-
-
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
+		padding: 10,
 	},
 	button: {
 		alignItems: 'center',

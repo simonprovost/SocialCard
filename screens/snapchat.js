@@ -23,7 +23,7 @@
 							headerRightCorner={'https://c.mobilegeeks.de/wp-content/uploads/2012/11/whatsapp_messenger.png'}
 							formatPictureTopRightCorner={'square'}
 
-							bgCard={"#25d366"}
+							backgroundColorCard={"#25d366"}
 						/>
 						<Button rounded
 								onPress={this.logInFacebook}

@@ -102,7 +102,7 @@ export class InstagramScreen extends Component {
 							headerRightCorner={'https://i.pinimg.com/originals/ff/0e/20/ff0e20de4718fe14cdd256c81c5db771.png'}
 							formatPictureTopRightCorner={'square'}
 
-							bgCard={"white"}
+							backgroundColorCard={"white"}
 						/>
 					</View>
 					<Button rounded
@@ -132,7 +132,7 @@ export class InstagramScreen extends Component {
 					</Button>
 				</View>
 				:
-				<Container>
+				<Container style={styles.container}>
 
 					<GenericRoundedCard
 						fontBottomRightTitle={"SnapFont"}
@@ -161,7 +161,7 @@ export class InstagramScreen extends Component {
 						headerRightCorner={'https://i.pinimg.com/originals/ff/0e/20/ff0e20de4718fe14cdd256c81c5db771.png'}
 						formatPictureTopRightCorner={'square'}
 
-						bgCard={"white"}
+						backgroundColorCard={"white"}
 					/>
 					<Button rounded
 					        onPress={() => this.instagramLogin.show()}
@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
+		padding: 10,
 	},
 	button: {
 		alignItems: 'center',

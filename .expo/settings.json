@@ -3,5 +3,6 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "gm-rib"
+  "urlRandomness": "va-v5y",
+  "https": false
 }

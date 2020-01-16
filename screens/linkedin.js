@@ -93,7 +93,7 @@ export class LinkedinScreen extends Component {
 							headerRightCorner={'http://bullesdetalents.fr/site/wp-content/grand-media/image/picto_linkedin_blanc.png'}
 							formatPictureTopRightCorner={'square'}
 
-							bgCard={"#0077b5"}
+							backgroundColorCard={"#0077b5"}
 						/>
 					</View>
 					<Button rounded
@@ -121,7 +121,7 @@ export class LinkedinScreen extends Component {
 					</Button>
 				</View>
 				:
-				<Container>
+				<Container style={styles.container}>
 
 					<GenericRoundedCard
 						bottomRightCorner={'https://cdn.ticketswap.com/public/testimonials/201906/d3aed318-ac92-4de9-8827-03d30e545ece.jpeg'}
@@ -144,7 +144,7 @@ export class LinkedinScreen extends Component {
 						headerRightCorner={'http://bullesdetalents.fr/site/wp-content/grand-media/image/picto_linkedin_blanc.png'}
 						formatPictureTopRightCorner={'square'}
 
-						bgCard={"#0077b5"}
+						backgroundColorCard={"#0077b5"}
 					/>
 					<LinkedInModal
 						ref={ref => {
@@ -190,8 +190,6 @@ export class LinkedinScreen extends Component {
 					        title={"Log in with In button"}
 					        style={{flex: 1,
 						        backgroundColor: '#0077b5',
-						        marginBottom: 50,
-
 						        shadowColor: 'rgba(0,0,0, .4)', // IOS
 						        shadowOffset: { height: 1, width: 1 }, // IOS
 						        shadowOpacity: 1, // IOS
@@ -226,6 +224,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
+		padding: 10,
 	},
 	button: {
 		alignItems: 'center',

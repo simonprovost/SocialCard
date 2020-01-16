@@ -128,7 +128,7 @@ export class TwitterScreen extends Component {
 						headerRightCorner={'http://univ-cotedazur.fr/contenus-riches/images/logos/logo-twitter-blanc/image'}
 						formatPictureTopRightCorner={'square'}
 
-						bgCard={"#38A1F3"}
+						backgroundColorCard={"#38A1F3"}
 					/>
 				</View>
 				<Button rounded
@@ -156,7 +156,7 @@ export class TwitterScreen extends Component {
 					}}>Screenshot</Text>
 				</Button>
 			</View> :
-			<Container>
+			<Container style={styles.container}>
 
 				<GenericRoundedCard
 					fontBottomRightTitle={"SnapFont"}
@@ -185,7 +185,7 @@ export class TwitterScreen extends Component {
 					headerRightCorner={'http://univ-cotedazur.fr/contenus-riches/images/logos/logo-twitter-blanc/image'}
 					formatPictureTopRightCorner={'square'}
 
-					bgCard={"#38A1F3"}
+					backgroundColorCard={"#38A1F3"}
 				/>
 				<TWLoginButton
 					style={{height: 50, backgroundColor: '#38A1F3', paddingBottom: 10, paddingTop: 10,
@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		justifyContent: 'center',
+		padding: 10,
 	},
 	button: {
 		alignItems: 'center',

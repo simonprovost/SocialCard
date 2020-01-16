@@ -20,7 +20,6 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import {Header, Text} from "react-native-elements"
 import * as dataConstants from './app.json';
 
-
 export default class App extends Component {
 
 	constructor(props) {

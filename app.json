@@ -30,20 +30,20 @@
     },
     "extra": {
       "facebook": {
-        "appId": ""
+        "appId": "2445401388871908"
       },
       "instagram": {
-          "clientID": "",
-        "redirectURI": ""
+          "clientID": "b6593dc2f7c94d51a0faf65b1d3c0093",
+        "redirectURI": "https://google.com"
       },
       "linkedin": {
-        "clientID": "",
-        "clientSecret": "",
-        "redirectURI": ""
+        "clientID": "86vmluha5e73ou",
+        "clientSecret": "Q6p5Ft46YLlg2u6F",
+        "redirectURI": "https://www.google.fr/"
       },
       "twitter": {
-        "consumerKey": "",
-        "consumerKeySecret": ""
+        "consumerKey": "sIaBRZBbihUabSRkENZUjWL2e",
+        "consumerKeySecret": "u6qePkEENXuI5zttzFMYzIL335JBAGq38kpF8FGzptVgBt1CvB"
       }
     }
   }
