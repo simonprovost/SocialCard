@@ -22,21 +22,22 @@ export class TwitterScreen extends Component {
 	}
 
 	async componentDidMount() {
-		loadResourcesAsync = async () => Promise.all([
-			twitter.setConsumerKey(dataConstants.expo.extra.twitter.consumerKey,dataConstants.expo.extra.twitter.consumerKeySecret),
-		]);
+		const { twitter } = dataConstants.expo;
+		loadResourcesAsync = async () => Promise.all([ twitter.setConsumerKey(twitter.consumerKey,twitter.consumerKeySecret), ]);
 		this.setState({loading: false});
 	}
 
 	onGetAccessTokenTwitter = ({ oauth_token: token, oauth_token_secret: tokenSecret }) => {
-		this.setState({
-			token,
-			tokenSecret
-		})
+		this.setState({ token, tokenSecret })
 	};
 	onSuccessTwitter = async (user) => {
+		const {
+			token,
+			tokenSecret
+		} = this.state;
+
 		try {
-			await AsyncStorage.setItem("user", JSON.stringify({ ...user, token: this.state.token, tokenSecret: this.state.tokenSecret })) //for something in the future(like not needed new connection because these infos will be add in the stoage).
+			await AsyncStorage.setItem("user", JSON.stringify({ ...user, token: token, tokenSecret: tokenSecret })) //for something in the future(like not needed new connection because these infos will be add in the stoage).
 		}
 		catch (err) {
 			showMessage({
@@ -79,7 +80,13 @@ export class TwitterScreen extends Component {
 		});
 	};
 
+	_onLayout = (event) => {
+		this.find_dimensions(event.nativeEvent.layout)
+	};
+
 	render() {
+		const {screenShot,} = this.props;
+
 		if (this.state.loading) {
 			return (
 				<Root>
@@ -90,13 +97,8 @@ export class TwitterScreen extends Component {
 		}
 
 		let twitterCard = this.state.socialNetworkConnected?
-			<View style={{flex: 1, }}>
-				<View style={styles.container}
-				      collapsable={false}
-				      ref={view => {
-					      this.twitterView = view}}
-				      onLayout={(event) => { this.find_dimensions(event.nativeEvent.layout) }}
-				>
+			<View style={styles.twitterCard}>
+				<View style={styles.container} collapsable={false} ref={view => { this.twitterView = view}} onLayout={(event) => { this._onLayout(event) }}>
 					<GenericRoundedCard
 						fontBottomRightTitle={"SnapFont"}
 						fontBottomRightContent={"SnapFontLight"}
@@ -131,29 +133,8 @@ export class TwitterScreen extends Component {
 						backgroundColorCard={"#38A1F3"}
 					/>
 				</View>
-				<Button rounded
-				        onPress={() => this.props.screenShot(this.twitterView)}
-				        title={"Screenshot Twitter view"}
-				        style={{flex: 1,
-					        marginBottom: 50,
-
-					        shadowColor: 'rgba(0,0,0, .4)', // IOS
-					        shadowOffset: { height: 1, width: 1 }, // IOS
-					        shadowOpacity: 1, // IOS
-					        shadowRadius: 1, //IOS
-					        marginLeft: 10,
-					        marginRight: 10,
-					        elevation: 2,
-					        backgroundColor: "#38A1F3",
-
-				        }}
-				>
-					<Text style={{
-						fontFamily: 'Roboto',
-						color: 'white',
-						fontSize: 16,
-						fontWeight: '500',
-					}}>Screenshot</Text>
+				<Button rounded onPress={screenShot(this.twitterView)} title={"Screenshot Twitter view"} style={styles.twitterButton}>
+					<Text style={styles.screenshotButton}>Screenshot</Text>
 				</Button>
 			</View> :
 			<Container style={styles.container}>
@@ -188,22 +169,13 @@ export class TwitterScreen extends Component {
 					backgroundColorCard={"#38A1F3"}
 				/>
 				<TWLoginButton
-					style={{height: 50, backgroundColor: '#38A1F3', paddingBottom: 10, paddingTop: 10,
-						marginBottom: 50,  borderRadius: 50, flex: 0, elevation:2, marginLeft: 10, marginRight: 10, }}
-					type="TouchableOpacity"
-					onPress={this.onPressTwitter}
-					onGetAccessToken={this.onGetAccessTokenTwitter}
-					onSuccess={this.onSuccessTwitter}
-					onClose={this.onCloseTwitter}
-					onError={this.onErrorTwitter}
+					style={styles.loginTwitter}
+					type="TouchableOpacity" onPress={this.onPressTwitter} onGetAccessToken={this.onGetAccessTokenTwitter}
+					onSuccess={this.onSuccessTwitter} onClose={this.onCloseTwitter} onError={this.onErrorTwitter}
 				>
-					<Text style={{ textAlign: 'center', color: '#fff', fontFamily: 'Roboto',
-						fontSize: 16,
-						fontWeight: '500', }}>Log in with Twitter</Text>
-
+					<Text style={styles.textLoginTwitterButton}>Log in with Twitter</Text>
 				</TWLoginButton>
 			</Container>;
-
 
 		return(
 			<Container>
@@ -212,9 +184,6 @@ export class TwitterScreen extends Component {
 		);
 	}
 }
-
-
-
 
 const styles = StyleSheet.create({
 	container: {
@@ -238,5 +207,40 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-	}
+	},
+	twitterCard: {
+		flex: 1,
+	},
+	twitterButton: {
+		flex: 1,
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+		marginLeft: '5%',
+		marginRight: '5%',
+		elevation: 2,
+		backgroundColor: "#38A1F3",
+	},
+	screenShotButton: {
+		fontFamily: 'Roboto',
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500',
+	},
+	loginTwitter: {
+		height: '5%',
+		backgroundColor: '#38A1F3',
+		borderRadius: 50,
+		flex: 0,
+		elevation:2,
+		marginLeft: '5%',
+		marginRight: '5%',
+	},
+	textLoginTwitterButton: {
+		textAlign: 'center', color: '#fff', fontFamily: 'Roboto',
+		fontSize: 16,
+		fontWeight: '500',
+	},
+
 });

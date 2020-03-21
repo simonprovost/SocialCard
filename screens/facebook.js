@@ -22,26 +22,17 @@ export class FacebookScreen extends Component {
 	}
 
 	componentDidMount() {
-		this.setState({appId: dataConstants.expo.extra.facebook.appId,
-			loading: false})
+		this.setState({appId: dataConstants.expo.extra.facebook.appId, loading: false})
 	}
 
 	async logInFacebook() {
 		try {
-			const {
-				type,
-				token,
-				expires,
-				permissions,
-				declinedPermissions,
-			} = await Facebook.logInWithReadPermissionsAsync(this.state.appId, {
-				permissions: ['public_profile', 'email',],
-			});
+			const { type, token, } = await Facebook.logInWithReadPermissionsAsync(this.state.appId, { permissions: ['public_profile', 'email',], });
+
 			if (type === 'success') {
-				const response = await fetch(
-					`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),email`
-				);
+				const response = await fetch( `https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),email` );
 				const { picture, name, email } = await response.json();
+
 				this.setState({picture: picture, name: name, email: email, socialNetworkConnected: true});
 				showMessage({
 					message: "Facebook Login Info",
@@ -56,7 +47,6 @@ export class FacebookScreen extends Component {
 					type: "info",
 					icon: "info",
 				});
-				// type === 'cancel'
 			}
 		} catch ({ message }) {
 			showMessage({
@@ -68,7 +58,13 @@ export class FacebookScreen extends Component {
 		}
 	}
 
+	_onLayout = (event) => {
+		this.props.find_dimensions(event.nativeEvent.layout)
+	};
+
 	render() {
+		const {screenShot,} = this.props;
+
 		if (this.state.loading) {
 			return (
 				<Root>
@@ -78,13 +74,8 @@ export class FacebookScreen extends Component {
 			);
 		}
 		let facebookCard = this.state.socialNetworkConnected ?
-			<View style={{flex: 1, }}>
-				<View style={styles.container}
-				      collapsable={false}
-				      ref={view => {
-					      this.facebookView = view}}
-				      onLayout={(event) => { this.props.find_dimensions(event.nativeEvent.layout) }}
-				>
+			<View style={styles.fbCard}>
+				<View style={styles.container} collapsable={false} ref={view => { this.facebookView = view}} onLayout={(event) => { this._onLayout(event) }}>
 					<GenericRoundedCard
 						bottomRightCorner={this.state.picture.data.url}
 						formatPictureBottomRight={'circle'}
@@ -109,28 +100,8 @@ export class FacebookScreen extends Component {
 						backgroundColorCard={"#3b5998"}
 					/>
 				</View>
-				<Button rounded
-				        onPress={() => this.props.screenShot(this.facebookView)}
-				        title={"Screenshot Facebook view"}
-				        style={{flex: 1,
-
-					        shadowColor: 'rgba(0,0,0, .4)', // IOS
-					        shadowOffset: { height: 1, width: 1 }, // IOS
-					        shadowOpacity: 1, // IOS
-					        shadowRadius: 1, //IOS
-					        marginLeft: 10,
-					        marginRight: 10,
-					        elevation: 2,
-					        backgroundColor: "#3b5998",
-
-				        }}
-				>
-					<Text style={{
-						fontFamily: 'Roboto',
-						color: 'white',
-						fontSize: 16,
-						fontWeight: '500',
-					}}>Screenshot</Text>
+				<Button rounded onPress={screenShot(this.facebookView)} title={"Screenshot Facebook view"} style={styles.screenshotButton}>
+					<Text style={styles.titleScreenshotButton}>Screenshot</Text>
 				</Button>
 			</View>
 			:
@@ -158,30 +129,9 @@ export class FacebookScreen extends Component {
 
 					backgroundColorCard={"#3b5998"}
 				/>
-				<Button rounded
-				        onPress={this.logInFacebook}
-				        title={"Log in with Facebook button"}
-				        style={{flex: 1,
-					        backgroundColor: '#3b5998',
-					        marginBottom: 50,
-
-					        shadowColor: 'rgba(0,0,0, .4)', // IOS
-					        shadowOffset: { height: 1, width: 1 }, // IOS
-					        shadowOpacity: 1, // IOS
-					        shadowRadius: 1, //IOS
-					        marginLeft: 10,
-					        marginRight: 10,
-					        elevation: 2,
-				        }}
-				>
+				<Button rounded onPress={this.logInFacebook} title={"Log in with Facebook button"} style={styles.loginFacebook} >
 					<Icon name="logo-facebook" />
-
-					<Text style={{
-						fontFamily: 'Roboto',
-						color: 'white',
-						fontSize: 16,
-						fontWeight: '500',
-					}}>Log in With Facebook</Text>
+					<Text style={styles.textloginFbButton}>Log in With Facebook</Text>
 				</Button>
 			</View>;
 
@@ -215,5 +165,43 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	fbCard: {
+		flex:1,
+	},
+	screenshotButton: {
+		flex: 1,
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+		marginLeft: '5%',
+		marginRight: '5%',
+		elevation: 2,
+		backgroundColor: "#3b5998",
+	},
+	titleScreenshotButton: {
+		fontFamily: 'Roboto',
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500',
+	},
+	loginFacebook: {
+		flex: 1,
+		backgroundColor: '#3b5998',
+
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+		marginLeft: '5%',
+		marginRight: '5%',
+		elevation: 2,
+	},
+	textloginFbButton: {
+		fontFamily: 'Roboto',
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500',
 	}
 });

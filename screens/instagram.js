@@ -56,7 +56,23 @@ export class InstagramScreen extends Component {
 	};
 
 
+	_onLayout = (event) => {
+		this.props.find_dimensions(event.nativeEvent.layout)
+	};
+
+	_loginSuccessInstagram = () => {
+		this.getInstagramInfoUser(token);
+		showMessage({
+			message: "Instagram Login Info",
+			description: "User Connected.",
+			type: "success",
+			icon: "success",
+		})
+	}
+
 	render() {
+		const {screenShot,} = this.props;
+
 		if (this.state.loading) {
 			return (
 				<Root>
@@ -68,12 +84,11 @@ export class InstagramScreen extends Component {
 
 		let instaCard =
 			this.state.socialNetworkConnected ?
-				<View style={{flex: 1,}}>
+				<View style={styles.instagramCard}>
 					<View style={styles.container}
 					      collapsable={false}
-					      ref={view => {
-						      this.instaView = view}}
-					      onLayout={(event) => { this.props.find_dimensions(event.nativeEvent.layout) }}
+					      ref={view => {this.instaView = view}}
+					      onLayout={(event) => { this._onLayout(event) }}
 					>
 						<GenericRoundedCard
 							fontBottomRightTitle={"SnapFont"}
@@ -105,30 +120,9 @@ export class InstagramScreen extends Component {
 							backgroundColorCard={"white"}
 						/>
 					</View>
-					<Button rounded
-					        onPress={() => this.props.screenShot(this.instaView)}
-					        title={"Screenshot Insta view"}
-					        style={{flex: 1,
-						        marginBottom: 50,
-
-						        shadowColor: 'rgba(0,0,0, .4)', // IOS
-						        shadowOffset: { height: 1, width: 1 }, // IOS
-						        shadowOpacity: 1, // IOS
-						        shadowRadius: 1, //IOS
-
-						        elevation: 2,
-						        marginLeft: 10,
-						        marginRight: 10,
-						        backgroundColor: "white",
-
-					        }}
-					>
-						<Text style={{
-							fontFamily: 'Roboto',
-							color: '#282c34',
-							fontSize: 16,
-							fontWeight: '500',
-						}}>Screenshot</Text>
+					<Button rounded onPress={() => this.props.screenShot(this.instaView)}
+					        title={"Screenshot Insta view"} style={styles.screenShotButton}>
+						<Text style={styles.textScreenShotButton}>Screenshot</Text>
 					</Button>
 				</View>
 				:
@@ -163,45 +157,14 @@ export class InstagramScreen extends Component {
 
 						backgroundColorCard={"white"}
 					/>
-					<Button rounded
-					        onPress={() => this.instagramLogin.show()}
-					        title={"Log in with insta button"}
-					        style={{flex: 1,
-						        backgroundColor: 'white',
-						        marginBottom: 50,
-
-						        shadowColor: 'rgba(0,0,0, .4)', // IOS
-						        shadowOffset: { height: 1, width: 1 }, // IOS
-						        shadowOpacity: 1, // IOS
-						        shadowRadius: 1, //IOS
-
-						        elevation: 2,
-						        marginLeft: 10,
-						        marginRight: 10,
-					        }}
-					>
-						<Text style={{
-							fontFamily: 'Roboto',
-							color: '#282c34',
-							fontSize: 16,
-							fontWeight: '500',
-						}}>Log in With Instagram</Text>
+					<Button rounded onPress={() => this.instagramLogin.show()} title={"Log in with insta button"} style={styles.loginInstagram} >
+						<Text style={styles.textLoginInstagramButton}>Log in With Instagram</Text>
 					</Button>
 					<InstagramLogin
 						ref= {ref => this.instagramLogin= ref}
-						clientId={this.state.clientID}
-						redirectUrl={this.state.redirectURI}
-						scopes={['basic']}
+						clientId={this.state.clientID} redirectUrl={this.state.redirectURI} scopes={['basic']}
 
-						onLoginSuccess={(token) => {
-							this.getInstagramInfoUser(token);
-							showMessage({
-								message: "Instagram Login Info",
-								description: "User Connected.",
-								type: "success",
-								icon: "success",
-							});
-						}}
+						onLoginSuccess={(token) => { this._loginSuccessInstagram(token) }}
 						onLoginFailure={(data) => {
 							showMessage({
 								message: "Instagram Login Info",
@@ -246,5 +209,46 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	instagramCard: {
+		flex:1,
+	},
+	screenShotButton: {
+		flex: 1,
+
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+
+		elevation: 2,
+		marginLeft: '5%',
+		marginRight: '5%',
+		backgroundColor: "white",
+
+	},
+	textScreenShotButton: {
+		fontFamily: 'Roboto',
+		color: '#282c34',
+		fontSize: 16,
+		fontWeight: '500',
+	},
+	loginInstagram: {
+		backgroundColor: 'white',
+
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+
+		elevation: 2,
+		marginLeft: '5%',
+		marginRight: '5%',
+	},
+	textLoginInstagramButton: {
+		fontFamily: 'Roboto',
+		color: '#282c34',
+		fontSize: 16,
+		fontWeight: '500',
 	}
 });

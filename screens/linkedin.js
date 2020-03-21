@@ -64,12 +64,11 @@ export class LinkedinScreen extends Component {
 
 		let inCard =
 			this.state.linkedinConnected ?
-				<View style={{flex: 1,}}>
+				<View style={styles.card}>
 					<View style={styles.container}
-					      collapsable={false}
-					      ref={view => {
-						      this.linkedinView = view}}
-					      onLayout={(event) => { this.props.find_dimensions(event.nativeEvent.layout) }}
+						  collapsable={false}
+						  ref={view => { this.linkedinView = view}}
+						  onLayout={(event) => { this.props.find_dimensions(event.nativeEvent.layout) }}
 					>
 						<GenericRoundedCard
 							bottomRightCorner={this.state.urlPictureProfileLinkedin}
@@ -97,27 +96,11 @@ export class LinkedinScreen extends Component {
 						/>
 					</View>
 					<Button rounded
-					        onPress={() => this.props.screenShot(this.linkedinView)}
-					        title={"Screenshot Linkedin view"}
-					        style={{flex: 1,
-						        marginBottom: 50,
-
-						        shadowColor: 'rgba(0,0,0, .4)', // IOS
-						        shadowOffset: { height: 1, width: 1 }, // IOS
-						        shadowOpacity: 1, // IOS
-						        shadowRadius: 1, //IOS
-						        marginLeft: 10,
-						        marginRight: 10,
-						        elevation: 2,
-						        backgroundColor: "#0077b5",
-					        }}
+							onPress={() => this.props.screenShot(this.linkedinView)}
+							title={"Screenshot Linkedin view"}
+							style={styles.screenShotButton}
 					>
-						<Text style={{
-							fontFamily: 'Roboto',
-							color: 'white',
-							fontSize: 16,
-							fontWeight: '500',
-						}}>Screenshot</Text>
+						<Text style={styles.textScreenShotButton}>Screenshot</Text>
 					</Button>
 				</View>
 				:
@@ -147,9 +130,7 @@ export class LinkedinScreen extends Component {
 						backgroundColorCard={"#0077b5"}
 					/>
 					<LinkedInModal
-						ref={ref => {
-							this.modal = ref
-						}}
+						ref={ref => { this.modal = ref }}
 						clientID={this.state.clientID}
 						clientSecret={this.state.clientSecret}
 						redirectUri={this.state.redirectURI}
@@ -184,28 +165,13 @@ export class LinkedinScreen extends Component {
 						linkText={''}
 					/>
 					<Button rounded
-					        onPress={() => {
-						        this.modal.open()
-					        }}
-					        title={"Log in with In button"}
-					        style={{flex: 1,
-						        backgroundColor: '#0077b5',
-						        shadowColor: 'rgba(0,0,0, .4)', // IOS
-						        shadowOffset: { height: 1, width: 1 }, // IOS
-						        shadowOpacity: 1, // IOS
-						        shadowRadius: 1, //IOS
-
-						        elevation: 2,
-						        marginLeft: 10,
-						        marginRight: 10,
-					        }}
+							onPress={() => {
+								this.modal.open()
+							}}
+							title={"Log in with In button"}
+							style={styles.loginLinkedin}
 					>
-						<Text style={{
-							fontFamily: 'Roboto',
-							color: 'white',
-							fontSize: 16,
-							fontWeight: '500',
-						}}>Log in With Linkedin</Text>
+						<Text style={styles.textLoginLinkedin}>Log in With Linkedin</Text>
 					</Button>
 				</Container>;
 
@@ -242,5 +208,43 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	card: {
+		flex: 1,
+	},
+	screenshotButton: {
+		flex: 1,
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+		marginLeft: '5%',
+		marginRight: '5%',
+		elevation: 2,
+		backgroundColor: "#0077b5",
+	},
+	textScreenShotButton: {
+		fontFamily: 'Roboto',
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500',
+	},
+	loginLinkedin: {
+		flex: 1,
+		backgroundColor: '#0077b5',
+		shadowColor: 'rgba(0,0,0, .4)', // IOS
+		shadowOffset: { height: 1, width: 1 }, // IOS
+		shadowOpacity: 1, // IOS
+		shadowRadius: 1, //IOS
+
+		elevation: 2,
+		marginLeft: '5%',
+		marginRight: '5%',
+	},
+	textLoginLinkedin: {
+		fontFamily: 'Roboto',
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500',
 	}
 });

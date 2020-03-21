@@ -16,7 +16,7 @@ import {InstagramScreen} from "./screens/instagram";
 import {LinkedinScreen} from "./screens/linkedin";
 import * as Permissions from 'expo-permissions';
 import FlashMessage from "react-native-flash-message";
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage} from "react-native-flash-message";
 import {Header, Text} from "react-native-elements"
 import * as dataConstants from './app.json';
 
@@ -32,36 +32,30 @@ export default class App extends Component {
 		};
 	}
 
+	_howToSolvedItButton = () => {
+		Alert.alert('Social Card APP INFO', 'Open app.json to configure the data for api', [
+			{text: 'OK', onPress: () => BackHandler.exitApp()}
+		])
+	}
+
 	async componentDidMount(title, message) {
+		const {
+			facebook,
+			instagram,
+			linkedin,
+			twitter
+		} = dataConstants.expo.extra;
+
 		if (
-			dataConstants.expo.extra.facebook.appId === undefined ||
-			dataConstants.expo.extra.instagram.clientID === undefined ||
-			dataConstants.expo.extra.instagram.redirectURI === undefined ||
-			dataConstants.expo.extra.linkedin.clientID === undefined ||
-			dataConstants.expo.extra.linkedin.clientSecret === undefined ||
-			dataConstants.expo.extra.linkedin.redirectURI === undefined ||
-			dataConstants.expo.extra.twitter.consumerKey === undefined ||
-			dataConstants.expo.extra.twitter.consumerKeySecret === undefined ||
-			dataConstants.expo.extra.facebook.appId === "" ||
-			dataConstants.expo.extra.instagram.clientID === "" ||
-			dataConstants.expo.extra.instagram.redirectURI === "" ||
-			dataConstants.expo.extra.linkedin.clientID === "" ||
-			dataConstants.expo.extra.linkedin.clientSecret === "" ||
-			dataConstants.expo.extra.linkedin.redirectURI === "" ||
-			dataConstants.expo.extra.twitter.consumerKey === "" ||
-			dataConstants.expo.extra.twitter.consumerKeySecret === ""
+			facebook.appId === undefined ||	instagram.clientID === undefined ||	instagram.redirectURI === undefined ||
+			linkedin.clientID === undefined || linkedin.clientSecret === undefined || linkedin.redirectURI === undefined ||
+			twitter.consumerKey === undefined || twitter.consumerKeySecret === undefined || facebook.appId === "" ||
+			instagram.clientID === "" || instagram.redirectURI === "" || linkedin.clientID === "" ||
+			linkedin.clientSecret === "" || linkedin.redirectURI === "" || twitter.consumerKey === "" ||
+			twitter.consumerKeySecret === ""
 		) {
-			Alert.alert(
-				'Social card APP INFO',
-				'Data for API was not found (ios you can exit by hand the app)',
-				[
-					{text: 'How to solved it  ?', onPress: () => {
-							Alert.alert('Social Card APP INFO', 'Open app.json to configure the data for api', [
-								{text: 'OK', onPress: () => BackHandler.exitApp()}
-							])
-						}},
-					{text: 'OK', onPress: () => BackHandler.exitApp()},
-				],
+			Alert.alert( 'Social card APP INFO', 'Data for API was not found (ios you can exit by hand the app)',
+				[ {text: 'How to solved it  ?', onPress: this._howToSolvedItButton}, {text: 'OK', onPress: () => BackHandler.exitApp()}, ],
 				{cancelable: false},
 			);
 		}
@@ -103,7 +97,7 @@ export default class App extends Component {
 		} else {
 			showMessage({
 				message: "Screnshot Info",
-				description: "Screenshot wasn t take ! ",
+				description: "Screenshot wasn t taken ! ",
 				type: "danger",
 				icon: "danger",
 			});
@@ -147,52 +141,36 @@ export default class App extends Component {
 			);
 		}
 
+
+		let titleHeader= <Text h3 style={styles.headerTitle}>{"Social Card"}</Text>;
+
 		return (
 			<View style={styles.container}>
 				<Header
-					statusBarProps={{ barStyle: 'light-content' }}
 					barStyle="light-content"
-					centerComponent={<Text h3 style={{color: 'white', }}>{"Social Card"}</Text>}
-					containerStyle={{
-						backgroundColor: this.state.colorHeader,
-						justifyContent: 'space-around',
-						height: "10%",
-						borderBottomRightRadius: 60,
-						borderBottomLeftRadius: 60,
-					}}get
+					centerComponent={titleHeader}
+					containerStyle={{ ...styles.header, backgroundColor: this.state.colorHeader, }}
 				/>
 				<Swiper
-					showsPagination={true}
-					index={0}
-					dot={<View style={{backgroundColor:'rgba(0,0,0,.1)', width: 5, height: 5,borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
-					activeDot={<View style={{backgroundColor: 'gray', width: 8, height: 8, borderRadius: 4, marginLeft: 3, marginRight: 3, marginTop: 3, marginBottom: 3,}} />}
+					showsPagination={true} index={0} dot={<View style={styles.dotSwiper} />}
+					activeDot={<View style={styles.activeDotSwiper} />}
 					onMomentumScrollEnd ={this._onMomentumScrollEnd}
 				>
 					<FacebookScreen
-						screenShot={this.screenShot}
-						find_dimensions={this.find_dimensions}
-						changeColorHeader={this.changeColorHeader}
+						screenShot={this.screenShot} find_dimensions={this.find_dimensions} changeColorHeader={this.changeColorHeader}
 					/>
 					<TwitterScreen
-						screenShot={this.screenShot}
-						find_dimensions={this.find_dimensions}
-						changeColorHeader={this.changeColorHeader}
+						screenShot={this.screenShot} find_dimensions={this.find_dimensions} changeColorHeader={this.changeColorHeader}
 					/>
 					<InstagramScreen
-						screenShot={this.screenShot}
-						find_dimensions={this.find_dimensions}
-						changeColorHeader={this.changeColorHeader}
+						screenShot={this.screenShot} find_dimensions={this.find_dimensions} changeColorHeader={this.changeColorHeader}
 					/>
 					<LinkedinScreen
-						screenShot={this.screenShot}
-						find_dimensions={this.find_dimensions}
-						changeColorHeader={this.changeColorHeader}
+						screenShot={this.screenShot} find_dimensions={this.find_dimensions} changeColorHeader={this.changeColorHeader}
 					/>
 				</Swiper>
 				<FlashMessage position="top" />
-
 			</View>
-
 		);
 	}
 }
@@ -202,6 +180,35 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 	},
+	headerTitle: {
+		color: 'white',
+	},
+	header: {
+		justifyContent: 'space-around',
+		height: "10%",
+		borderBottomRightRadius: 30,
+		borderBottomLeftRadius: 30,
+	},
+	dotSwiper: {
+		backgroundColor:'rgba(0,0,0,.1)',
+		width: 5,
+		height: 5,
+		borderRadius: 4,
+		marginLeft: '2%',
+		marginRight: '2%',
+		marginTop: '2%',
+		marginBottom: '2%',
+	},
+	activeDotSwiper: {
+		backgroundColor: 'gray',
+		width: 8,
+		height: 8,
+		borderRadius: 4,
+		marginLeft: '2%',
+		marginRight: '2%',
+		marginTop: '2%',
+		marginBottom: '2%',
+	}
 });
 
 
